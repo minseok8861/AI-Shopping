@@ -20,16 +20,9 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().permitAll()
-                )
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/h2-console/**")
-                )
-                .headers(headers -> headers
-                        .frameOptions(frame -> frame.sameOrigin())
                 );
 
         return http.build();
     }
-}
+}   
