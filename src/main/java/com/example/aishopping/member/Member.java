@@ -17,4 +17,7 @@ public class Member {
     private String name;
 
     private String password;
+
+    @Column(unique = true)
+    private String email;
 }

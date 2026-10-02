@@ -25,13 +25,14 @@ public class MemberController {
             return "비밀번호가 일치하지 않습니다.";
         }
         try{
-        memberService.createMember(memberCreateForm.getName(), memberCreateForm.getPassword());
+        memberService.createMember(memberCreateForm.getName(), memberCreateForm.getEmail(),memberCreateForm.getPassword());
 
-        } catch (DataIntegrityViolationException e) {
-            return "이미 등록된 사용자입니다.";
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
         }
         catch (Exception e) {
-            return "회원가입 중 오류가 발생했습니다.";
+            e.printStackTrace();
+            return "회원가입 중 오류가 발생했습니다. "+e.getMessage();
         }
         return "회원가입이 완료되었습니다.";
     }
