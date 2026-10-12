@@ -2,11 +2,15 @@ package com.example.aishopping.member;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -35,5 +39,23 @@ public class MemberController {
             return "회원가입 중 오류가 발생했습니다. "+e.getMessage();
         }
         return "회원가입이 완료되었습니다.";
+    }
+    @GetMapping("/login")
+    public String login() {
+        return "로그인 페이지";
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<?> loginStatus(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return ResponseEntity.ok(Map.of(
+                    "loggedIn", true,
+                    "name", authentication.getName()
+            ));
+        } else {
+            return ResponseEntity.ok(Map.of(
+                    "loggedIn", false
+            ));
+        }
     }
 }
