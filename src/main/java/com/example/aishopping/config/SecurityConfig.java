@@ -27,8 +27,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> {})
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/member/me").authenticated()
                         .anyRequest().permitAll()
                 )
+                .exceptionHandling(errors -> errors.authenticationEntryPoint((request, response, exception) ->
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED)))
                 .formLogin(formLogin -> formLogin
                         .loginProcessingUrl("/login")
                         .successHandler((request, response, authentication) -> {

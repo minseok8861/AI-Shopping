@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Signup from "./Signup";
+import Signup from "./SIgnup";
 import Login from "./Login";
+import Account from "./Account";
 
 function Home() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -45,6 +46,7 @@ function Home() {
             <h1>AI Shopping</h1>
             {loggedIn ? (
                 <div> <p>{name}님 환영합니다!</p>
+                    <Link to="/account">내 정보 관리</Link>{" "}
                     <button onClick={handleLogout}>
                         로그아웃
                     </button>
@@ -70,6 +72,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/account" element={<Account />} />
             </Routes>
         </BrowserRouter>
     );
