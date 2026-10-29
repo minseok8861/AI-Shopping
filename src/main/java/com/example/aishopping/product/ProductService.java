@@ -1,4 +1,4 @@
-package product;
+package com.example.aishopping.product;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

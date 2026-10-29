@@ -1,4 +1,4 @@
-package product;
+package com.example.aishopping.product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;

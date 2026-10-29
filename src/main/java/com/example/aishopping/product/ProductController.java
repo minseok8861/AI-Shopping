@@ -1,4 +1,4 @@
-package product;
+package com.example.aishopping.product;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

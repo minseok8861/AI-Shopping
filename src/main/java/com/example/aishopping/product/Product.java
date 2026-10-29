@@ -1,4 +1,4 @@
-package product;
+package com.example.aishopping.product;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,10 +19,10 @@ public class Product {
     private String productName;
 
     @Column(nullable = false)
-    private String Gender;
+    private String gender;
 
     @Column(nullable = false)
-    private String Category;
+    private String category;
 
     @Column(nullable = false)
     private String color;
