@@ -1,7 +1,7 @@
 .site-header {
   box-sizing: border-box;
-  min-height: 180px;
-  padding: 48px clamp(17px, 2.43vw, 35px) 39px clamp(16px, 2.36vw, 34px);
+  min-height: 150px;
+  padding: 38px clamp(16px, 1.69vw, 24px) 32px clamp(16px, 2.11vw, 30px);
   background: #fff;
   color: #000;
   font-family: Pretendard, system-ui, sans-serif;
@@ -9,7 +9,7 @@
 
 .site-header-inner {
   display: grid;
-  gap: 20px;
+  gap: 18px;
   width: 100%;
   max-width: 1371px;
   margin-inline: auto;
@@ -24,13 +24,7 @@
 }
 
 .site-header-top {
-  min-height: 32px;
-  align-items: flex-start;
-  padding-right: 1px;
-}
-
-.site-header-bottom {
-  min-height: 41px;
+  min-height: 27px;
 }
 
 .site-header a {
@@ -43,9 +37,8 @@
 }
 
 .site-header-brand {
-  width: 80px;
-  font: 800 22px/24px Paperlogy, Pretendard, system-ui, sans-serif;
-  letter-spacing: 0.08em;
+  font: 800 21px/24px Paperlogy, Pretendard, system-ui, sans-serif;
+  letter-spacing: 0.04em;
 }
 
 .site-header-utilities,
@@ -53,23 +46,20 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 28px;
+  gap: 8px 23px;
 }
 
 .site-header-utilities {
   justify-content: flex-end;
-  min-height: 32px;
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 22px;
+  font-size: 10px;
+  line-height: 16px;
 }
 
-.site-header-utilities a,
+.site-header-utilities > a,
 .site-header-utility {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  height: 23px;
+  gap: 5px;
   white-space: nowrap;
 }
 
@@ -82,21 +72,21 @@
 }
 
 .site-header-utilities [data-utility='outfits'] {
-  min-width: 60px;
   font-weight: 600;
 }
 
-.site-header-utilities [data-utility='profile'] {
-  min-width: 76px;
+.site-header .site-header-account {
+  width: auto;
+  min-width: 80px;
+  min-height: 27px;
+  gap: 2px;
+  padding: 4px 5px;
+  font: inherit;
+  white-space: nowrap;
 }
 
-.site-header-utilities [data-utility='favorites'] {
-  min-width: 57px;
-}
-
-.site-header-utilities [data-utility='cart'] {
-  min-width: 84px;
-  gap: 5px;
+.site-header-account:has(a) {
+  cursor: default;
 }
 
 .site-header .site-header-account:disabled {
@@ -104,27 +94,15 @@
 }
 
 .site-header-categories {
-  gap: 8px 31px;
+  gap: 8px 26px;
   color: #1f1f1f;
-  font: 500 16px/22px Paperlogy, Pretendard, system-ui, sans-serif;
+  font: 500 15px/22px Paperlogy, Pretendard, Arial, sans-serif;
 }
 
 .site-header-categories [data-category] {
   display: inline-flex;
   align-items: center;
   height: 23px;
-}
-
-.site-header-categories [data-category='best'] {
-  width: 42px;
-}
-
-.site-header-categories [data-category='women'] {
-  width: 72px;
-}
-
-.site-header-categories [data-category='men'] {
-  width: 40px;
 }
 
 .site-header-categories button {
@@ -143,23 +121,23 @@
 
 .site-header-count {
   box-sizing: border-box;
-  min-width: 14px;
+  min-width: 12px;
   padding-inline: 2px;
   border-radius: 999px;
   background: #ff6264;
   color: #fff;
   font-size: 9px;
   font-weight: 600;
-  line-height: 14px;
+  line-height: 12px;
   text-align: center;
 }
 
 .site-header-search {
   box-sizing: border-box;
   display: flex;
-  width: 250px;
+  width: 207px;
   max-width: 100%;
-  height: 41px;
+  height: 35px;
   border: 1px solid #dadada;
   border-radius: 40px;
 }
@@ -182,7 +160,7 @@
 .site-header-search button {
   display: grid;
   place-items: center;
-  padding: 0 12px 0 0;
+  padding: 0 9px 0 0;
   cursor: pointer;
 }
 

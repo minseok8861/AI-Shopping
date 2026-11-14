@@ -1,11 +1,12 @@
 import { Button } from './ui/index.js';
+import { SearchBox } from './SearchBox.jsx';
 import './Header.css';
 
 const utilityLinks = [
-  { key: 'outfits', label: 'AI 코디', icon: 'M8 2l1.6 4.4L14 8l-4.4 1.6L8 14 6.4 9.6 2 8l4.4-1.6L8 2Z' },
-  { key: 'profile', label: '마이페이지', icon: 'M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM2 14a6 6 0 0 1 12 0' },
-  { key: 'favorites', label: '좋아요', icon: 'M8 13.5 2.5 8a3.5 3.5 0 0 1 5-5L8 3.5l.5-.5a3.5 3.5 0 0 1 5 5Z' },
-  { key: 'cart', label: '장바구니', icon: 'M2 5h12l-1 9H3L2 5Zm3 0V4a3 3 0 0 1 6 0v1' },
+  { key: 'outfits', label: 'AI 코디', icon: 'M8 0a8 8 0 0 0-7 12L0 16l4-1A8 8 0 1 0 8 0ZM4 8a.75.75 0 1 1 1.5 0A.75.75 0 0 1 4 8Zm3.25 0a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0Zm3.25 0a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0Z' },
+  { key: 'profile', label: '마이페이지', icon: 'M12 4a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM0 16a7 7 0 0 1 7-7h2a7 7 0 0 1 7 7Z' },
+  { key: 'favorites', label: '좋아요', icon: 'M8 16 1.4 9A4.8 4.8 0 0 1 8 2.1 4.8 4.8 0 0 1 14.6 9Z' },
+  { key: 'cart', label: '장바구니', icon: 'M4 5V4a4 4 0 0 1 8 0v1h2.5L16 16H0L1.5 5Zm1.25 0h5.5V4a2.75 2.75 0 0 0-5.5 0Z' },
 ];
 
 const categoryLinks = [
@@ -14,10 +15,11 @@ const categoryLinks = [
   { key: 'men', label: 'MEN' },
 ];
 
-function HeaderIcon({ path, width = 18, height = 18 }) {
+function HeaderIcon({ path, size = 16, filled = false }) {
   return (
-    <svg aria-hidden="true" width={width} height={height} viewBox="0 0 16 16"
-      fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round">
+    <svg aria-hidden="true" width={size} height={size} viewBox="0 0 16 16"
+      fill={filled ? 'currentColor' : 'none'} fillRule="evenodd"
+      stroke={filled ? 'none' : 'currentColor'} strokeWidth="1.25" strokeLinecap="round">
       <path d={path} />
     </svg>
   );
@@ -28,17 +30,10 @@ export function Header({
   cartCount = 0,
   onAccountClick,
   accountActions,
-  onSearch,
   activeCategory,
   onCategoryClick,
   showUnavailableActions = false,
 }) {
-  function handleSearch(event) {
-    event.preventDefault();
-    const query = new FormData(event.currentTarget).get('query').trim();
-    if (query) onSearch(query);
-  }
-
   return (
     <header className="site-header">
       <div className="site-header-inner">
@@ -48,8 +43,7 @@ export function Header({
             {utilityLinks.map(({ key, label, icon }) => {
               const content = (
                 <>
-                  <HeaderIcon path={icon} width={key === 'favorites' ? 19 : 18}
-                    height={key === 'favorites' ? 17 : 18} />
+                  <HeaderIcon path={icon} filled />
                   {label}
                   {key === 'cart' && cartCount > 0 && <span className="site-header-count">{cartCount}</span>}
                 </>
@@ -94,15 +88,7 @@ export function Header({
               return links[key] && <a key={key} href={links[key]} data-category={key}>{label}</a>;
             })}
           </nav>
-          {(onSearch || showUnavailableActions) && (
-            <form className="site-header-search" role="search" onSubmit={handleSearch}>
-              <input type="search" name="query" aria-label="검색어" required disabled={!onSearch} />
-              <button type="submit" aria-label="상품 검색" disabled={!onSearch}>
-                <HeaderIcon width={17.6} height={17.42}
-                  path="M11.5 7a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-1.3 3.2 3.3 3.3" />
-              </button>
-            </form>
-          )}
+          <SearchBox showSuggestions />
         </div>
       </div>
     </header>

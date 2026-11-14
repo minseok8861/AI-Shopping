@@ -4,8 +4,10 @@ import Login from './Login.jsx';
 import Signup from './SIgnup.jsx';
 import { Button } from './components/ui/index.js';
 import { HomeScreen } from './screens/HomeScreen.jsx';
+import { WomenScreen } from './screens/WomenScreen.jsx';
+import { SearchScreen } from './screens/SearchScreen.jsx';
 
-function Home() {
+function Storefront({ Screen = HomeScreen }) {
   const [member, setMember] = useState(null);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ function Home() {
   }
 
   return (
-    <HomeScreen
+    <Screen
       accountActions={member ? (
         <>
           <span>{member.name}님 환영합니다!</span>
@@ -48,10 +50,11 @@ function Home() {
           </Button>
         </>
       ) : (
-        <>
+        <div className="site-header-account ui-button ui-button-account">
           <Link to="/login">로그인</Link>
+          <span aria-hidden="true">/</span>
           <Link to="/signup">회원가입</Link>
-        </>
+        </div>
       )}
     />
   );
@@ -61,7 +64,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Storefront />} />
+        <Route path="/women/all" element={<Storefront Screen={WomenScreen} />} />
+        <Route path="/search" element={<Storefront Screen={SearchScreen} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
