@@ -1,0 +1,27 @@
+.ui-heart-button {
+  display: inline-grid;
+  place-items: center;
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  color: var(--heart-outline, #fff);
+  cursor: pointer;
+}
+
+.ui-heart-button svg {
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7px;
+  stroke-linejoin: round;
+}
+
+.ui-heart-button[aria-pressed='true'] svg {
+  fill: #ff3636;
+  stroke: #ff3636;
+}
+
+.ui-heart-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
