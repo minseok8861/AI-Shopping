@@ -9,7 +9,7 @@ const outfits = [
   ['심플하게 입고, 존재감은 더하고', '평범한 일상에 특별한 포인트를 더하는 레더 재킷 룩'],
 ];
 
-export function HomeScreen() {
+export function HomeScreen({ accountActions }) {
   const { activeCategory, toggleCategory, handleCategoryKeyDown } = useCategoryPanel();
 
   return (
@@ -18,6 +18,7 @@ export function HomeScreen() {
         links={{ home: './', best: '#outfits', outfits: '#outfits' }}
         activeCategory={activeCategory}
         onCategoryClick={toggleCategory}
+        accountActions={accountActions}
         showUnavailableActions
       />
       <main className="storefront-main">

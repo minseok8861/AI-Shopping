@@ -27,6 +27,7 @@ export function Header({
   links = {},
   cartCount = 0,
   onAccountClick,
+  accountActions,
   onSearch,
   activeCategory,
   onCategoryClick,
@@ -64,12 +65,12 @@ export function Header({
               }
               return null;
             })}
-            {(onAccountClick || showUnavailableActions) && (
+            {accountActions ?? ((onAccountClick || showUnavailableActions) && (
               <Button variant="account" className="site-header-account"
                 onClick={onAccountClick} disabled={!onAccountClick}>
                 로그인 / 회원가입
               </Button>
-            )}
+            ))}
           </nav>
         </div>
         <div className="site-header-row site-header-bottom">
