@@ -1,0 +1,41 @@
+.ui-text-input {
+  box-sizing: border-box;
+  width: 493px;
+  max-width: 100%;
+  min-width: 0;
+  height: 61px;
+  padding: 0 22px;
+  border: 2px solid #000;
+  border-radius: 12px;
+  background: #fff;
+  color: #000;
+  font: 600 20px/24px Pretendard, system-ui, sans-serif;
+  text-align: center;
+  letter-spacing: 0.08em;
+}
+
+.ui-text-input-white::placeholder {
+  color: #000;
+  opacity: 1;
+}
+
+.ui-text-input-black {
+  background: #000;
+  color: #fff;
+}
+
+.ui-text-input-black::placeholder {
+  color: #fff;
+  opacity: 1;
+}
+
+.ui-text-input-example {
+  font-weight: 500;
+  text-align: left;
+  letter-spacing: 0.02em;
+}
+
+.ui-text-input-example::placeholder {
+  color: #8a8a8a;
+  opacity: 1;
+}
