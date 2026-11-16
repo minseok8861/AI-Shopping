@@ -1,0 +1,60 @@
+###
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "productName": "Test T-Shirt",
+  "gender": "남성",
+  "category": "상의",
+  "color": "White",
+  "price": 30000,
+  "imageUrl": "https://example.com/test.jpg",
+  "size": "L"
+}
+
+###
+
+###
+PUT http://localhost:8080/products/7
+Content-Type: application/json
+
+{
+  "productName": "Updated T-Shirt",
+  "gender": "남성",
+  "category": "상의",
+  "color": "Black",
+  "price": 35000,
+  "imageUrl": "https://example.com/test.jpg",
+  "size": "M"
+}
+
+###
+DELETE http://localhost:8080/products/7
+
+###
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "productName": "Validation Test",
+  "gender": "남성",
+  "category": "상의",
+  "color": "White",
+  "price": -30000,
+  "imageUrl": "https://example.com/test.jpg",
+  "size": "L"
+}
+
+###
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "productName": "",
+  "gender": "남성",
+  "category": "상의",
+  "color": "White",
+  "price": 30000,
+  "imageUrl": "https://example.com/test.jpg",
+  "size": "L"
+}
