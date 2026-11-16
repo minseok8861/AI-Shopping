@@ -1,0 +1,163 @@
+.women-catalog {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(116px, 220px) minmax(0, 1fr);
+  gap: clamp(24px, 3.6vw, 52px);
+  box-sizing: border-box;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: 36px clamp(32px, 5.55vw, 80px) 80px var(--page-gutter);
+}
+
+.women-catalog > .category-panel {
+  z-index: 1;
+}
+
+.women-catalog-sidebar h1 {
+  margin: 0;
+  padding-bottom: 22px;
+  border-bottom: 2px solid #000;
+  font: 600 18px/24px Paperlogy, Pretendard, system-ui, sans-serif;
+}
+
+.women-catalog-sidebar ul {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 24px 0 0;
+  list-style: none;
+  color: #555;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.women-catalog-sidebar [aria-current] {
+  color: #000;
+  font-weight: 700;
+}
+
+.women-catalog-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 72px;
+}
+
+.women-catalog-toolbar select {
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: #444;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.women-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: clamp(12px, 1.94vw, 28px);
+  row-gap: clamp(48px, 7.65vw, 110px);
+}
+
+.women-product-media {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: #f1f1f1;
+}
+
+.women-product-heart {
+  --heart-outline: #555;
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+}
+
+.women-product-brand {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.women-product h2 {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  margin: 2px 0 8px;
+  color: #333;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  overflow-wrap: anywhere;
+}
+
+.women-product-price {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.women-product-price span {
+  color: #ef4545;
+  font-size: 14px;
+}
+
+.women-product-labels,
+.women-product-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+  font-size: 10px;
+}
+
+.women-product-labels span {
+  padding: 2px 4px;
+  background: #f2f2f2;
+  color: #555;
+}
+
+.women-product-stats {
+  color: #b96300;
+}
+
+.women-product-stats span:first-child {
+  color: #d63838;
+}
+
+@media (max-width: 1440px) {
+  .women-catalog {
+    grid-template-columns: minmax(90px, 15.28vw) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .women-catalog {
+    padding-right: var(--page-gutter);
+  }
+
+  .women-catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 440px) {
+  .women-catalog {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .women-catalog-sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 12px;
+  }
+
+  .women-catalog-toolbar {
+    min-height: 40px;
+  }
+}

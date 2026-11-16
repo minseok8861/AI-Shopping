@@ -1,0 +1,97 @@
+.storefront {
+  --page-gutter: clamp(16px, 2.36vw, 34px);
+  width: 100%;
+  min-height: 100svh;
+  background: #fff;
+  color: #000;
+  color-scheme: light;
+  text-align: left;
+  font-family: Pretendard, system-ui, sans-serif;
+}
+
+.storefront-main {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: 15px var(--page-gutter) 48px;
+}
+
+.intro {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+  letter-spacing: 0.08em;
+  font-family: Paperlogy, Pretendard, system-ui, sans-serif;
+}
+
+.intro h1,
+.outfits h2 {
+  margin: 0;
+  color: inherit;
+  letter-spacing: 0.08em;
+}
+
+.intro h1 {
+  font: 500 25px/24px Paperlogy, Pretendard, system-ui, sans-serif;
+}
+
+.intro p {
+  font-size: clamp(16px, 2.3vw, 23px);
+  font-weight: 300;
+  line-height: 24px;
+}
+
+.intro a {
+  display: inline-grid;
+  place-items: center;
+  box-sizing: border-box;
+  min-height: 52px;
+  width: 240px;
+  max-width: 100%;
+  margin-top: 9px;
+  border: 1px solid #484848;
+  border-radius: 10px;
+  background: #000;
+  color: #fff;
+  font: 700 17px/24px Pretendard, system-ui, sans-serif;
+  text-decoration: none;
+}
+
+.outfits {
+  margin-top: 65px;
+}
+
+.outfits h2 {
+  margin-bottom: 26px;
+  font: 800 30px/24px Pretendard, system-ui, sans-serif;
+}
+
+.outfit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.85vw, 41px);
+}
+
+.outfit-image {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: #f2f2f2;
+}
+
+.outfit-grid h3 {
+  margin: 16px 0 10px;
+  font-size: 22px;
+  line-height: 24px;
+}
+
+.outfit-grid p {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+@media (max-width: 600px) {
+  .outfit-grid {
+    grid-template-columns: 1fr;
+  }
+}

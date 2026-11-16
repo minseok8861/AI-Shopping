@@ -1,0 +1,32 @@
+.category-panel {
+  position: absolute;
+  inset: 1px 0 auto;
+  box-sizing: border-box;
+  min-height: 239px;
+  padding: 23px calc(var(--page-gutter) - 1px);
+  border: 1px solid #dadada;
+  background: #fff;
+  font: 400 18px/24px Paperlogy, Pretendard, system-ui, sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.category-panel[data-category='women'] {
+  min-height: 300px;
+}
+
+.category-panel ul {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.category-panel a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.category-panel a:hover {
+  text-decoration: underline;
+}
