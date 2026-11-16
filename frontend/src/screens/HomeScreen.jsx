@@ -24,7 +24,7 @@ export function HomeScreen({ accountActions }) {
       <main className="storefront-main">
         <section className="intro">
           <h1>당신의 취향, 온도를 읽다.</h1>
-          <p>오늘의 기분부터 나만의 스타일 발견까지.</p>
+          <p>오늘의 기분부터 나만의 스타일 <span>발견까지.</span></p>
           <a href="#outfits">AI 코디네이터 시작하기</a>
         </section>
         <section id="outfits" className="outfits">

@@ -23,6 +23,7 @@
   gap: 14px;
   letter-spacing: 0.08em;
   font-family: Paperlogy, Pretendard, system-ui, sans-serif;
+  container-type: inline-size;
 }
 
 .intro h1,
@@ -37,9 +38,10 @@
 }
 
 .intro p {
-  font-size: clamp(16px, 2.3vw, 23px);
+  font-size: min(4cqi, 23px);
   font-weight: 300;
   line-height: 24px;
+  white-space: nowrap;
 }
 
 .intro a {

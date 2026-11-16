@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import Login from './Login.jsx';
+import Login, { LoginScreen } from './Login.jsx';
 import Signup from './SIgnup.jsx';
 import { Button } from './components/ui/index.js';
 import { HomeScreen } from './screens/HomeScreen.jsx';
@@ -50,11 +50,9 @@ function Storefront({ Screen = HomeScreen }) {
           </Button>
         </>
       ) : (
-        <div className="site-header-account ui-button ui-button-account">
-          <Link to="/login">로그인</Link>
-          <span aria-hidden="true">/</span>
-          <Link to="/signup">회원가입</Link>
-        </div>
+        <Link to="/login" className="site-header-account ui-button ui-button-account">
+          로그인 / 회원가입
+        </Link>
       )}
     />
   );
@@ -67,8 +65,9 @@ export default function App() {
         <Route path="/" element={<Storefront />} />
         <Route path="/women/all" element={<Storefront Screen={WomenScreen} />} />
         <Route path="/search" element={<Storefront Screen={SearchScreen} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Storefront Screen={LoginScreen} />} />
+        <Route path="/login/email" element={<Storefront Screen={Login} />} />
+        <Route path="/signup" element={<Storefront Screen={Signup} />} />
       </Routes>
     </BrowserRouter>
   );
