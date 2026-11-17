@@ -1,0 +1,9 @@
+.account-page { min-height: 100vh; display: grid; place-items: center; padding: 24px; box-sizing: border-box; background: #f5f7fb; }
+.account-card { width: min(100%, 420px); padding: 28px; box-sizing: border-box; background: white; color: #334155; color-scheme: light; border-radius: 12px; box-shadow: 0 4px 20px #00000012; }
+.account-card h1 { color: #0f172a; font-size: 32px; }
+.account-card form, .account-card label { display: grid; gap: 8px; }
+.account-card form { gap: 16px; }
+.account-card input { box-sizing: border-box; width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+.account-card input[readonly] { background: #f1f5f9; }
+.account-card button { padding: 10px; cursor: pointer; }
+.account-card .withdraw { color: #b91c1c; background: white; border: 1px solid #b91c1c; }
