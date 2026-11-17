@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import Login, { LoginScreen } from './Login.jsx';
 import Signup from './SIgnup.jsx';
+import Account from './Account.jsx';
 import { Button } from './components/ui/index.js';
 import { HomeScreen } from './screens/HomeScreen.jsx';
 import { WomenScreen } from './screens/WomenScreen.jsx';
@@ -47,6 +48,7 @@ function Storefront({ Screen = HomeScreen }) {
       accountActions={member ? (
         <>
           <span>{member.name}님 환영합니다!</span>
+          <Link to="/account" className="site-header-account ui-button ui-button-account">내 정보 관리</Link>
           <Button variant="account" className="site-header-account" onClick={handleLogout}>
             로그아웃
           </Button>
@@ -74,6 +76,7 @@ export default function App() {
           <Route path="/login" element={<Storefront Screen={LoginScreen} />} />
           <Route path="/login/email" element={<Storefront Screen={Login} />} />
           <Route path="/signup" element={<Storefront Screen={Signup} />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </ProductLikesContext.Provider>
     </BrowserRouter>
