@@ -1,0 +1,51 @@
+.ui-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 260px;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font: 700 14px/20px Pretendard, system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.ui-button-white {
+  background: #fff;
+  border-color: #ddd;
+  color: #1f1f1f;
+}
+
+.ui-button-black {
+  background: #000;
+  color: #fff;
+}
+
+.ui-button-account,
+.ui-button-delete {
+  min-height: 32px;
+  padding: 4px;
+  border-radius: 5.5px;
+  background: #f2f2f2;
+}
+
+.ui-button-account {
+  width: 96px;
+  color: #000;
+  font: 300 12px/22px Pretendard, system-ui, sans-serif;
+}
+
+.ui-button-delete {
+  width: 90px;
+  color: #6a6a6a;
+  font: 400 15px/22px Pretendard, system-ui, sans-serif;
+}
+
+.ui-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
