@@ -17,7 +17,7 @@
   margin: 0;
   padding-bottom: 22px;
   border-bottom: 2px solid #000;
-  font: 600 18px/24px Paperlogy, Pretendard, system-ui, sans-serif;
+  font: 600 18px/24px Pretendard, system-ui, sans-serif;
 }
 
 .women-catalog-sidebar ul {
@@ -118,7 +118,7 @@
 }
 
 .women-product-price span {
-  color: #ef4545;
+  color: var(--color-red);
   font-size: 14px;
 }
 

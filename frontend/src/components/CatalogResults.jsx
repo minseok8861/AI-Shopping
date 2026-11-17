@@ -30,9 +30,9 @@ function ProductCard({ product }) {
       </p>
       <p className="women-product-stats">
         <span aria-label={`좋아요 ${likeCount}`} style={{ color: colorPalette.레드 }}>♥ {likeCount}</span>
-        <span aria-label={`평점 ${product.rating}, 리뷰 ${product.reviews}개`}>
+        {product.rating && <span aria-label={`평점 ${product.rating}, 리뷰 ${product.reviews}개`}>
           <span className="rating-star" aria-hidden="true">★</span> {product.rating} ({product.reviews})
-        </span>
+        </span>}
       </p>
     </article>
   );

@@ -6,4 +6,4 @@
 .account-card input { box-sizing: border-box; width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
 .account-card input[readonly] { background: #f1f5f9; }
 .account-card button { padding: 10px; cursor: pointer; }
-.account-card .withdraw { color: #b91c1c; background: white; border: 1px solid #b91c1c; }
+.account-card .withdraw { color: var(--color-red); background: white; border: 1px solid var(--color-red); }

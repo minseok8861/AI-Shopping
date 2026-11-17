@@ -4,7 +4,7 @@
   padding: 38px clamp(16px, 1.69vw, 24px) 32px clamp(16px, 2.11vw, 30px);
   background: #fff;
   color: #000;
-  font-family: Pretendard, system-ui, sans-serif;
+  font-family: Paperlogy, Pretendard, system-ui, sans-serif;
 }
 
 .site-header-inner {
@@ -51,6 +51,7 @@
 
 .site-header-utilities {
   justify-content: flex-end;
+  font-family: Pretendard, system-ui, sans-serif;
   font-size: 10px;
   line-height: 16px;
 }
@@ -124,7 +125,7 @@
   min-width: 12px;
   padding-inline: 2px;
   border-radius: 999px;
-  background: #ff6264;
+  background: var(--color-red);
   color: #fff;
   font-size: 9px;
   font-weight: 600;

@@ -22,7 +22,7 @@
   justify-items: start;
   gap: 14px;
   letter-spacing: 0.08em;
-  font-family: Paperlogy, Pretendard, system-ui, sans-serif;
+  font-family: Pretendard, system-ui, sans-serif;
   container-type: inline-size;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .intro h1 {
-  font: 500 25px/24px Paperlogy, Pretendard, system-ui, sans-serif;
+  font: 500 25px/24px Pretendard, system-ui, sans-serif;
 }
 
 .intro p {

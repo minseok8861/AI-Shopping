@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { useCart } from '../hooks/useCart.js';
 import { Button } from './ui/index.js';
 import { SearchBox } from './SearchBox.jsx';
 import './Header.css';
@@ -27,13 +29,16 @@ function HeaderIcon({ path, size = 16, filled = false }) {
 
 export function Header({
   links = {},
-  cartCount = 0,
+  cartCount,
   onAccountClick,
   accountActions,
   activeCategory,
   onCategoryClick,
   showUnavailableActions = false,
 }) {
+  const cart = useCart();
+  const itemCount = cartCount ?? cart?.cartItems.reduce((sum, item) => sum + item.quantity, 0) ?? 0;
+
   return (
     <header className="site-header">
       <div className="site-header-inner">
@@ -45,11 +50,12 @@ export function Header({
                 <>
                   <HeaderIcon path={icon} filled />
                   {label}
-                  {key === 'cart' && cartCount > 0 && <span className="site-header-count">{cartCount}</span>}
+                  {key === 'cart' && itemCount > 0 && <span className="site-header-count">{itemCount}</span>}
                 </>
               );
 
               if (links[key]) return <a key={key} href={links[key]} data-utility={key}>{content}</a>;
+              if (key === 'cart' && cart) return <Link key={key} to="/cart" data-utility={key}>{content}</Link>;
               if (showUnavailableActions) {
                 return (
                   <button key={key} type="button" className="site-header-utility" data-utility={key} disabled>
