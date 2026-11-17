@@ -6,6 +6,8 @@ import { Button } from './components/ui/index.js';
 import { HomeScreen } from './screens/HomeScreen.jsx';
 import { WomenScreen } from './screens/WomenScreen.jsx';
 import { SearchScreen } from './screens/SearchScreen.jsx';
+import { ProductDetailScreen } from './screens/ProductDetailScreen.jsx';
+import { ProductLikesContext } from './hooks/useProductLike.js';
 
 function Storefront({ Screen = HomeScreen }) {
   const [member, setMember] = useState(null);
@@ -59,16 +61,21 @@ function Storefront({ Screen = HomeScreen }) {
 }
 
 export default function App() {
+  const [likesById, setLikesById] = useState({});
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Storefront />} />
-        <Route path="/women/all" element={<Storefront Screen={WomenScreen} />} />
-        <Route path="/search" element={<Storefront Screen={SearchScreen} />} />
-        <Route path="/login" element={<Storefront Screen={LoginScreen} />} />
-        <Route path="/login/email" element={<Storefront Screen={Login} />} />
-        <Route path="/signup" element={<Storefront Screen={Signup} />} />
-      </Routes>
+      <ProductLikesContext.Provider value={{ likesById, setLikesById }}>
+        <Routes>
+          <Route path="/" element={<Storefront />} />
+          <Route path="/women/all" element={<Storefront Screen={WomenScreen} />} />
+          <Route path="/search" element={<Storefront Screen={SearchScreen} />} />
+          <Route path="/products/:productId" element={<Storefront Screen={ProductDetailScreen} />} />
+          <Route path="/login" element={<Storefront Screen={LoginScreen} />} />
+          <Route path="/login/email" element={<Storefront Screen={Login} />} />
+          <Route path="/signup" element={<Storefront Screen={Signup} />} />
+        </Routes>
+      </ProductLikesContext.Provider>
     </BrowserRouter>
   );
 }
