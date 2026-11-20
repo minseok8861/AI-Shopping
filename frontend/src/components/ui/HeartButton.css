@@ -17,8 +17,8 @@
 }
 
 .ui-heart-button[aria-pressed='true'] svg {
-  fill: #ff3636;
-  stroke: #ff3636;
+  fill: var(--heart-pressed);
+  stroke: var(--heart-pressed);
 }
 
 .ui-heart-button:disabled {

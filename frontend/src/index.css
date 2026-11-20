@@ -8,3 +8,7 @@ body,
 p {
   margin: 0;
 }
+
+.rating-star {
+  color: #ffcc23;
+}

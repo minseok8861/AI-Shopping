@@ -1,33 +1,12 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useProductLike } from '../hooks/useProductLike.js';
+import { colorPalette } from './colorPalette.js';
+import { numberFormat, products } from './products.js';
 import { HeartButton } from './ui/index.js';
 
-const jumper = {
-  name: '라이트 점퍼 - 6 COLOR',
-  price: 28900,
-  coupon: true,
-  likes: 148,
-  rating: '4.3',
-  reviews: 47,
-};
-
-const fleece = {
-  name: 'Reversible Mellow Fleece Jacket - Green',
-  price: 46300,
-  discount: 32,
-  likes: 75,
-  rating: '4.8',
-  reviews: 23,
-};
-
-const products = Array.from({ length: 8 }, (_, index) => ({
-  ...(index % 4 === 0 ? jumper : fleece),
-  id: index + 1,
-}));
-
-const numberFormat = new Intl.NumberFormat('ko-KR');
-
 function ProductCard({ product }) {
-  const [liked, setLiked] = useState(Boolean(product.discount));
+  const { liked, setLiked, likeCount } = useProductLike(product);
 
   return (
     <article className="women-product">
@@ -39,8 +18,8 @@ function ProductCard({ product }) {
           onPressedChange={setLiked}
         />
       </div>
-      <p className="women-product-brand">ONDO</p>
-      <h2>{product.name}</h2>
+      <p className="women-product-brand">{product.brand}</p>
+      <h2><Link to={`/products/${product.id}`}>{product.name}</Link></h2>
       <p className="women-product-price">
         {product.discount && <span>{product.discount}%</span>}
         {numberFormat.format(product.price)}
@@ -50,9 +29,9 @@ function ProductCard({ product }) {
         <span>무료배송</span>
       </p>
       <p className="women-product-stats">
-        <span aria-label={`좋아요 ${product.likes}`}>♥ {product.likes}</span>
+        <span aria-label={`좋아요 ${likeCount}`} style={{ color: colorPalette.레드 }}>♥ {likeCount}</span>
         <span aria-label={`평점 ${product.rating}, 리뷰 ${product.reviews}개`}>
-          ★ {product.rating} ({product.reviews})
+          <span className="rating-star" aria-hidden="true">★</span> {product.rating} ({product.reviews})
         </span>
       </p>
     </article>
