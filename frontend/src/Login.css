@@ -11,6 +11,11 @@
   padding-bottom: 24px;
 }
 
+.login-screen.storefront-main,
+.login-form-page.storefront-main {
+  font-family: Paperlogy, Pretendard, system-ui, sans-serif;
+}
+
 .login-screen.storefront-main {
   padding-top: clamp(28px, 15vh, 164px);
 }
@@ -28,7 +33,6 @@
   gap: clamp(20px, 6vh, 60px);
   width: 100%;
   container-type: inline-size;
-  font-family: Paperlogy, Pretendard, system-ui, sans-serif;
   letter-spacing: 0.08em;
 }
 
@@ -120,7 +124,7 @@
 }
 
 .auth-field label span {
-  color: #bf4141;
+  color: var(--color-red);
 }
 
 .auth-field input {
@@ -164,11 +168,12 @@
 }
 
 .auth-field input[aria-invalid='true'] {
-  border-color: #c71919;
+  border-color: var(--color-red);
+  outline-color: var(--color-red);
 }
 
 .auth-error {
-  color: #c71919;
+  color: var(--color-red);
   font-size: 13px;
 }
 
@@ -182,7 +187,9 @@
   border-radius: 4px;
   background: #000;
   color: #fff;
-  font: 600 clamp(15px, 1.25vw, 18px)/1.3 Pretendard, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.3;
   text-decoration: none;
   cursor: pointer;
 }

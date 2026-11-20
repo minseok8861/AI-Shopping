@@ -84,7 +84,6 @@ export default function Account() {
                 <Link to="/">← 홈으로</Link>
                 <h1>내 정보 관리</h1>
                 {member && <form onSubmit={update}>
-                    <label>아이디<input value={member.name} readOnly /></label>
                     <label>이메일<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
                     <label>현재 비밀번호<input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} autoComplete="current-password" required /></label>
                     <label>새 비밀번호 <small>(변경할 때만 입력)</small><input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} minLength={8} maxLength={20} autoComplete="new-password" /></label>

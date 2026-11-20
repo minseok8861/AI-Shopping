@@ -5,6 +5,7 @@ import { Header } from '../components/Header.jsx';
 import { numberFormat, products } from '../components/products.js';
 import { Button, ColorSwatch, HeartButton } from '../components/ui/index.js';
 import { useCategoryPanel } from '../hooks/useCategoryPanel.js';
+import { useCart } from '../hooks/useCart.js';
 import { useProductLike } from '../hooks/useProductLike.js';
 import './ProductDetailScreen.css';
 
@@ -45,6 +46,8 @@ function OptionPicker({ label, title, options, selected, open, onToggle, onSelec
 }
 
 function ProductDetail({ product }) {
+  const { addToCart } = useCart();
+  const cartDialogRef = useRef(null);
   const { liked, setLiked, likeCount } = useProductLike(product);
   const [section, setSection] = useState('details');
   const [colorOpen, setColorOpen] = useState(false);
@@ -68,6 +71,11 @@ function ProductDetail({ product }) {
     if (option !== current) setQuantity(1);
   }
 
+  function handleAddToCart() {
+    addToCart(product, color, size, quantity);
+    cartDialogRef.current.showModal();
+  }
+
   return (
     <>
       <div className="product-detail-grid">
@@ -77,7 +85,8 @@ function ProductDetail({ product }) {
           <p className="product-detail-category"><Link to="/women/all">WOMEN</Link> › 아우터</p>
           <h1 id="product-detail-title">{product.name}</h1>
           <p className="product-detail-rating">
-            <span className="rating-star" aria-hidden="true">★</span> {product.rating} · 리뷰 {product.reviews}개
+            {product.rating && <><span className="rating-star" aria-hidden="true">★</span> {product.rating} · </>}
+            리뷰 {product.reviews}개
           </p>
           <span className="product-detail-shipping-badge">무료배송</span>
 
@@ -133,7 +142,7 @@ function ProductDetail({ product }) {
               <HeartButton pressed={liked} onPressedChange={setLiked} />
               <span>{likeCount}</span>
             </div>
-            <Button disabled>장바구니</Button>
+            <Button disabled={!hasSelection} onClick={handleAddToCart}>장바구니</Button>
             <Button variant="black" disabled>구매하기</Button>
           </div>
         </section>
@@ -146,6 +155,18 @@ function ProductDetail({ product }) {
           </button>
         ))}
       </div>
+      <dialog ref={cartDialogRef} className="product-detail-cart-dialog" aria-labelledby="cart-confirmation-title">
+        <h2 id="cart-confirmation-title">장바구니에 상품을 담았습니다</h2>
+        <div className="product-detail-cart-dialog-actions">
+          <form method="dialog">
+            <Button type="submit" autoFocus>닫기</Button>
+          </form>
+          <Link to="/cart" className="ui-button ui-button-black"
+            onClick={() => cartDialogRef.current.close()}>
+            장바구니 바로가기
+          </Link>
+        </div>
+      </dialog>
     </>
   );
 }

@@ -5,7 +5,7 @@ import { Button } from './components/ui/index.js';
 import './SIgnup.css';
 
 const headings = [
-    '계정 정보를 입력해주세요.',
+    '이메일과 비밀번호를 입력해주세요.',
     '이름과 연락처를 입력해주세요.',
     '맞춤 추천을 위한 정보를 입력해 주세요.',
 ];
@@ -24,7 +24,7 @@ function SignupField({ id, label, required = true, unit, ...props }) {
 
 export default function Signup({ accountActions }) {
     const [details, setDetails] = useState({
-        name: '', email: '', password: '', password2: '',
+        email: '', password: '', password2: '',
         fullName: '', phone: '', gender: '', birthDate: '', heightCm: '',
     });
     const [step, setStep] = useState(0);
@@ -103,8 +103,6 @@ export default function Signup({ accountActions }) {
                 <h2>{headings[step]}</h2>
                 {step === 0 && (
                     <div className="signup-fields signup-account-fields">
-                        <SignupField id="signup-name" label="아이디" autoComplete="username"
-                            placeholder="아이디 (4~20자)" minLength={4} maxLength={20} {...field('name')} />
                         <SignupField id="signup-email" label="이메일 주소" type="email" autoComplete="email"
                             placeholder="ondo@email.com" {...field('email')} />
                         <PasswordField id="signup-password" label="비밀번호" markRequired

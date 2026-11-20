@@ -69,7 +69,7 @@
 }
 
 .signup-gender legend span {
-  color: #bf4141;
+  color: var(--color-red);
 }
 
 .signup-gender div {
@@ -182,7 +182,7 @@
 }
 
 .signup-form--contact label span {
-  color: #ff6264;
+  color: var(--color-red);
   font-size: 1.25em;
   font-weight: 700;
 }
