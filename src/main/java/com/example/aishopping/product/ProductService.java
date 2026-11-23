@@ -103,4 +103,12 @@ public class ProductService {
     Product product = findProduct(id);
     productRepository.delete(product);
   }
+
+  @Transactional(readOnly = true)
+  public List<ProductResponseDto> getProductsByFilters(
+      String gender, String category, String color, String size) {
+    return productRepository.findByFilters(gender, category, color, size).stream()
+        .map(this::convertToDto)
+        .toList();
+  }
 }
