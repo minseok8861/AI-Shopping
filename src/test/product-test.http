@@ -79,3 +79,51 @@ GET http://localhost:8080/products/filter?gender=UNISEX
 
 ### 전체 상품
 GET http://localhost:8080/products/filter
+
+### 가격 낮은 순
+GET http://localhost:8080/products/sort?sort=priceAsc
+
+### 가격 높은 순
+GET http://localhost:8080/products/sort?sort=priceDesc
+
+### 최신 등록순
+GET http://localhost:8080/products/sort?sort=latest
+
+### 잘못된 정렬 조건
+GET http://localhost:8080/products/sort?sort=abc
+
+### 첫 번째 페이지 (10개)
+GET http://localhost:8080/products/page?page=0&size=10
+
+### 두 번째 페이지 (10개)
+GET http://localhost:8080/products/page?page=1&size=10
+
+### 첫 번째 페이지 (5개)
+GET http://localhost:8080/products/page?page=0&size=5
+
+### 잘못된 페이지 번호
+GET http://localhost:8080/products/page?page=-1&size=10
+
+### 너무 큰 페이지 크기
+GET http://localhost:8080/products/page?page=0&size=101
+
+### 첫 번째 페이지 - 최신순
+GET http://localhost:8080/products/page?page=0&size=10&sort=latest
+
+### 첫 번째 페이지 - 가격 낮은 순
+GET http://localhost:8080/products/page?page=0&size=10&sort=priceAsc
+
+### 첫 번째 페이지 - 가격 높은 순
+GET http://localhost:8080/products/page?page=0&size=10&sort=priceDesc
+
+### 두 번째 페이지 - 가격 낮은 순
+GET http://localhost:8080/products/page?page=1&size=10&sort=priceAsc
+
+### 정렬 조건 생략 - 최신순 기본 적용
+GET http://localhost:8080/products/page?page=0&size=10
+
+### 잘못된 정렬 조건
+GET http://localhost:8080/products/page?page=0&size=10&sort=abc
+
+### 잘못된 페이지 번호
+GET http://localhost:8080/products/page?page=-1&size=10

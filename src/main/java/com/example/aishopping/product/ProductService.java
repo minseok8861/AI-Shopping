@@ -2,8 +2,14 @@ package com.example.aishopping.product;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 @RequiredArgsConstructor
 @Service
@@ -110,5 +116,33 @@ public class ProductService {
     return productRepository.findByFilters(gender, category, color, size).stream()
         .map(this::convertToDto)
         .toList();
+  }
+
+  @Transactional(readOnly = true)
+  public List<ProductResponseDto> getProductsSorted(String sort) {
+    Sort sortOption =
+        switch (sort) {
+          case "priceAsc" -> Sort.by(Sort.Direction.ASC, "price");
+          case "priceDesc" -> Sort.by(Sort.Direction.DESC, "price");
+          case "latest" -> Sort.by(Sort.Direction.DESC, "id");
+          default -> throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 정렬입니다.");
+        };
+    return productRepository.findAll(sortOption).stream().map(this::convertToDto).toList();
+  }
+
+  @Transactional(readOnly = true)
+  public Page<ProductResponseDto> getProductsPaged(int page, int size, String sort) {
+    if (page < 0 || size < 1 || size > 100) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 페이지 또는 사이즈입니다.");
+    }
+    Sort sortOption =
+        switch (sort) {
+          case "priceAsc" -> Sort.by(Sort.Direction.ASC, "price");
+          case "priceDesc" -> Sort.by(Sort.Direction.DESC, "price");
+          case "latest" -> Sort.by(Sort.Direction.DESC, "id");
+          default -> throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 정렬입니다.");
+        };
+    Pageable pageable = PageRequest.of(page, size, sortOption);
+    return productRepository.findAll(pageable).map(this::convertToDto);
   }
 }

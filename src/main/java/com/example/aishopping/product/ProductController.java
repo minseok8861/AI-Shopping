@@ -3,6 +3,7 @@ package com.example.aishopping.product;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -69,5 +70,18 @@ public class ProductController {
       @RequestParam(required = false) String color,
       @RequestParam(required = false) String size) {
     return productService.getProductsByFilters(gender, category, color, size);
+  }
+
+  @GetMapping("/sort")
+  public List<ProductResponseDto> getProductsSorted(@RequestParam String sort) {
+    return productService.getProductsSorted(sort);
+  }
+
+  @GetMapping("/page")
+  public Page<ProductResponseDto> getProductsPaged(
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size,
+      @RequestParam(defaultValue = "latest") String sort) {
+    return productService.getProductsPaged(page, size, sort);
   }
 }
