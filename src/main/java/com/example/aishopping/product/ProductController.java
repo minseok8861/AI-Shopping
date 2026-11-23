@@ -61,4 +61,13 @@ public class ProductController {
   public void deleteProduct(@PathVariable long id) {
     productService.deleteProduct(id);
   }
+
+  @GetMapping("/filter")
+  public List<ProductResponseDto> getProductsByFilters(
+      @RequestParam(required = false) String gender,
+      @RequestParam(required = false) String category,
+      @RequestParam(required = false) String color,
+      @RequestParam(required = false) String size) {
+    return productService.getProductsByFilters(gender, category, color, size);
+  }
 }

@@ -4,9 +4,9 @@ Content-Type: application/json
 
 {
   "productName": "Test T-Shirt",
-  "gender": "남성",
-  "category": "상의",
-  "color": "White",
+  "gender": "MEN",
+  "category": "TOP",
+  "color": "WHITE",
   "price": 30000,
   "imageUrl": "https://example.com/test.jpg",
   "size": "L"
@@ -20,9 +20,9 @@ Content-Type: application/json
 
 {
   "productName": "Updated T-Shirt",
-  "gender": "남성",
-  "category": "상의",
-  "color": "Black",
+  "gender": "MEN",
+  "category": "TOP",
+  "color": "BLACK",
   "price": 35000,
   "imageUrl": "https://example.com/test.jpg",
   "size": "M"
@@ -37,9 +37,9 @@ Content-Type: application/json
 
 {
   "productName": "Validation Test",
-  "gender": "남성",
-  "category": "상의",
-  "color": "White",
+  "gender": "MEN",
+  "category": "TOP",
+  "color": "WHITE",
   "price": -30000,
   "imageUrl": "https://example.com/test.jpg",
   "size": "L"
@@ -51,10 +51,31 @@ Content-Type: application/json
 
 {
   "productName": "",
-  "gender": "남성",
-  "category": "상의",
-  "color": "White",
+  "gender": "MEN",
+  "category": "TOP",
+  "color": "WHITE",
   "price": 30000,
   "imageUrl": "https://example.com/test.jpg",
   "size": "L"
 }
+
+### 남성 상품
+GET http://localhost:8080/products/filter?gender=MEN
+
+### 남성 상의
+GET http://localhost:8080/products/filter?gender=MEN&category=TOP
+
+### 검정색 상품
+GET http://localhost:8080/products/filter?color=BLACK
+
+### 여성 하의
+GET http://localhost:8080/products/filter?gender=WOMEN&category=BOTTOM
+
+### 남성 검정색 상의
+GET http://localhost:8080/products/filter?gender=MEN&category=TOP&color=BLACK
+
+### 공용 상품
+GET http://localhost:8080/products/filter?gender=UNISEX
+
+### 전체 상품
+GET http://localhost:8080/products/filter
