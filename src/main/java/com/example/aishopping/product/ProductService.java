@@ -27,6 +27,7 @@ public class ProductService {
     dto.setPrice(product.getPrice());
     dto.setImageUrl(product.getImageUrl());
     dto.setSize(product.getSize());
+    dto.setStockQuantity(product.getStockQuantity());
     return dto;
   }
 
@@ -84,6 +85,7 @@ public class ProductService {
     product.setPrice(productRequestDto.getPrice());
     product.setImageUrl(productRequestDto.getImageUrl());
     product.setSize(productRequestDto.getSize());
+    product.setStockQuantity(productRequestDto.getStockQuantity());
 
     Product savedProduct = productRepository.save(product);
     return convertToDto(savedProduct);
@@ -99,7 +101,7 @@ public class ProductService {
     product.setPrice(productRequestDto.getPrice());
     product.setImageUrl(productRequestDto.getImageUrl());
     product.setSize(productRequestDto.getSize());
-
+    product.setStockQuantity(productRequestDto.getStockQuantity());
     Product updatedProduct = productRepository.save(product);
     return convertToDto(updatedProduct);
   }
@@ -111,11 +113,28 @@ public class ProductService {
   }
 
   @Transactional(readOnly = true)
-  public List<ProductResponseDto> getProductsByFilters(
-      String gender, String category, String color, String size) {
-    return productRepository.findByFilters(gender, category, color, size).stream()
-        .map(this::convertToDto)
-        .toList();
+  public Page<ProductResponseDto> getProductsByFilters(
+      String gender,
+      String category,
+      String color,
+      String size,
+      int page,
+      int pageSize,
+      String sort) {
+    if (page < 0 || pageSize < 1 || pageSize > 100) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 페이지 또는 페이지 크기입니다.");
+    }
+    Sort sortOption =
+        switch (sort) {
+          case "priceAsc" -> Sort.by(Sort.Direction.ASC, "price");
+          case "priceDesc" -> Sort.by(Sort.Direction.DESC, "price");
+          case "latest" -> Sort.by(Sort.Direction.DESC, "id");
+          default -> throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 정렬입니다.");
+        };
+    Pageable pageable = PageRequest.of(page, pageSize, sortOption);
+    return productRepository
+        .findByFilters(gender, category, color, size, pageable)
+        .map(this::convertToDto);
   }
 
   @Transactional(readOnly = true)

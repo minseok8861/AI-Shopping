@@ -64,12 +64,15 @@ public class ProductController {
   }
 
   @GetMapping("/filter")
-  public List<ProductResponseDto> getProductsByFilters(
+  public Page<ProductResponseDto> getProductsByFilters(
       @RequestParam(required = false) String gender,
       @RequestParam(required = false) String category,
       @RequestParam(required = false) String color,
-      @RequestParam(required = false) String size) {
-    return productService.getProductsByFilters(gender, category, color, size);
+      @RequestParam(required = false) String size,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int pageSize,
+      @RequestParam(defaultValue = "latest") String sort) {
+    return productService.getProductsByFilters(gender, category, color, size, page, pageSize, sort);
   }
 
   @GetMapping("/sort")
