@@ -3,6 +3,7 @@ package com.example.aishopping.product;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,4 +34,8 @@ public class ProductRequestDto {
 
   @NotBlank(message = "이미지 URL은 필수입니다.")
   private String imageUrl;
+
+  @NotNull(message = "재고 수량은 필수입니다.")
+  @PositiveOrZero(message = "재고 수량은 0개 이상이어야 합니다.")
+  private int stockQuantity;
 }

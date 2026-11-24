@@ -1,4 +1,4 @@
-###
+### 재고 10개인 상품 등록
 POST http://localhost:8080/products
 Content-Type: application/json
 
@@ -9,12 +9,12 @@ Content-Type: application/json
   "color": "WHITE",
   "price": 30000,
   "imageUrl": "https://example.com/test.jpg",
-  "size": "L"
+  "size": "L",
+  "stockQuantity": 10
 }
 
-###
+### 업데이트
 
-###
 PUT http://localhost:8080/products/7
 Content-Type: application/json
 
@@ -25,13 +25,14 @@ Content-Type: application/json
   "color": "BLACK",
   "price": 35000,
   "imageUrl": "https://example.com/test.jpg",
-  "size": "M"
+  "size": "M",
+  "stockQuantity": 15
 }
 
-###
+### 삭제
 DELETE http://localhost:8080/products/7
 
-###
+### 잘못된 가격 입력
 POST http://localhost:8080/products
 Content-Type: application/json
 
@@ -42,10 +43,11 @@ Content-Type: application/json
   "color": "WHITE",
   "price": -30000,
   "imageUrl": "https://example.com/test.jpg",
-  "size": "L"
+  "size": "L",
+  "stockQuantity": 0
 }
 
-###
+### 잘못된 상품명 입력
 POST http://localhost:8080/products
 Content-Type: application/json
 
@@ -56,7 +58,8 @@ Content-Type: application/json
   "color": "WHITE",
   "price": 30000,
   "imageUrl": "https://example.com/test.jpg",
-  "size": "L"
+  "size": "L",
+  "stockQuantity": 0
 }
 
 ### 남성 상품
@@ -127,3 +130,22 @@ GET http://localhost:8080/products/page?page=0&size=10&sort=abc
 
 ### 잘못된 페이지 번호
 GET http://localhost:8080/products/page?page=-1&size=10
+
+### 남성 상품 + 가격 오름차순
+GET http://localhost:8080/products/filter?gender=MEN&sort=priceAsc&page=0&pageSize=10
+
+
+### 여성 상품 + 가격 내림차순
+GET http://localhost:8080/products/filter?gender=WOMEN&sort=priceDesc&page=0&pageSize=10
+
+
+### 여성 + 상의 + 검정색
+GET http://localhost:8080/products/filter?gender=WOMEN&category=TOP&color=BLACK&sort=priceAsc&page=0&pageSize=10
+
+
+### M 사이즈 + 가격 내림차순
+GET http://localhost:8080/products/filter?size=M&sort=priceDesc&page=0&pageSize=10
+
+
+### 남성 + 상의 + 검정색 + M 사이즈
+GET http://localhost:8080/products/filter?gender=MEN&category=TOP&color=BLACK&size=M&sort=priceAsc&page=0&pageSize=10
