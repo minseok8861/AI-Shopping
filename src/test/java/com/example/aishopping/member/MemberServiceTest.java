@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,17 +30,31 @@ class MemberServiceTest {
     @Test
     void updatesEmailAndEncodesNewPassword() {
         when(repository.saveAndFlush(any(Member.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        Member updated = service.updateMember("user", "new@example.com", "password123", "newpassword123");
+        Member updated = service.updateMember("user", "new@example.com", "password123", "newpassword123", null, null);
         assertEquals("new@example.com", updated.getEmail());
         assertTrue(encoder.matches("newpassword123", updated.getPassword()));
     }
 
     @Test
     void rejectsWrongPasswordAndDuplicateEmail() {
-        assertThrows(IllegalArgumentException.class, () -> service.updateMember("user", "new@example.com", "wrong", ""));
+        assertThrows(IllegalArgumentException.class, () -> service.updateMember("user", "new@example.com", "wrong", "", null, null));
         when(repository.existsByEmail("taken@example.com")).thenReturn(true);
-        assertThrows(IllegalStateException.class, () -> service.updateMember("user", "taken@example.com", "password123", ""));
+        assertThrows(IllegalStateException.class, () -> service.updateMember("user", "taken@example.com", "password123", "", null, null));
         verify(repository, never()).saveAndFlush(any());
+    }
+
+    @Test
+    void savesAndUpdatesProfileAndSellerType() {
+        LocalDate birthDate = LocalDate.of(2000, 1, 2);
+        when(repository.save(any(Member.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        Member created = service.createMember("seller", "seller@example.com", "password123", birthDate, 175, AccountType.SELLER);
+        assertEquals(birthDate, created.getBirthDate());
+        assertEquals(175, created.getHeightCm());
+        assertEquals(AccountType.SELLER, created.getAccountType());
+        when(repository.saveAndFlush(any(Member.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        Member updated = service.updateMember("user", "old@example.com", "password123", "", birthDate, 180);
+        assertEquals(birthDate, updated.getBirthDate());
+        assertEquals(180, updated.getHeightCm());
     }
 
     @Test

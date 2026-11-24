@@ -1,6 +1,7 @@
 package com.example.aishopping.member;
 
 import lombok.RequiredArgsConstructor;
+import java.time.LocalDate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public Member createMember(String name, String email, String password) {
+    public Member createMember(String name, String email, String password, LocalDate birthDate, Integer heightCm, AccountType accountType) {
         if (memberRepository.existsByName(name)) {
             throw new IllegalStateException("이미 등록된 이름입니다.");
         }
@@ -24,6 +25,9 @@ public class MemberService {
         Member member = new Member();
         member.setName(name);
         member.setEmail(email);
+        member.setBirthDate(birthDate);
+        member.setHeightCm(heightCm);
+        member.setAccountType(accountType);
         member.setPassword(passwordEncoder.encode(password));
         this.memberRepository.save(member);
         return member;
@@ -36,13 +40,15 @@ public class MemberService {
     }
 
     @Transactional
-    public Member updateMember(String name, String email, String currentPassword, String newPassword) {
+    public Member updateMember(String name, String email, String currentPassword, String newPassword, LocalDate birthDate, Integer heightCm) {
         Member member = getMember(name);
         verifyPassword(member, currentPassword);
         if (!member.getEmail().equals(email) && memberRepository.existsByEmail(email)) {
             throw new IllegalStateException("이미 등록된 이메일입니다.");
         }
         member.setEmail(email);
+        member.setBirthDate(birthDate);
+        member.setHeightCm(heightCm);
         if (newPassword != null && !newPassword.isBlank()) {
             member.setPassword(passwordEncoder.encode(newPassword));
         }

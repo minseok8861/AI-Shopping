@@ -18,6 +18,8 @@ export default function Account() {
     const navigate = useNavigate();
     const [member, setMember] = useState(null);
     const [email, setEmail] = useState("");
+    const [birthDate, setBirthDate] = useState("");
+    const [heightCm, setHeightCm] = useState("");
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -28,6 +30,8 @@ export default function Account() {
         request().then((data) => {
             setMember(data);
             setEmail(data.email);
+            setBirthDate(data.birthDate || "");
+            setHeightCm(data.heightCm ?? "");
         }).catch((error) => setMessage(error.message));
     }, []);
 
@@ -43,7 +47,7 @@ export default function Account() {
             const data = await request({
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, currentPassword, newPassword }),
+                body: JSON.stringify({ email, currentPassword, newPassword, birthDate: birthDate || null, heightCm: heightCm === "" ? null : Number(heightCm) }),
             });
             setMember(data);
             setCurrentPassword("");
@@ -86,6 +90,9 @@ export default function Account() {
                 {member && <form onSubmit={update}>
                     <label>아이디<input value={member.name} readOnly /></label>
                     <label>이메일<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
+                    <label>가입 유형<input value={member.accountType === "SELLER" ? "판매자" : "이용자"} readOnly /></label>
+                    <label>생년월일<input type="date" value={birthDate} max={new Intl.DateTimeFormat('sv-SE').format(new Date())} onChange={(e) => setBirthDate(e.target.value)} /></label>
+                    <label>키 (cm)<input type="number" min="1" max="300" value={heightCm} onChange={(e) => setHeightCm(e.target.value)} /></label>
                     <label>현재 비밀번호<input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} autoComplete="current-password" required /></label>
                     <label>새 비밀번호 <small>(변경할 때만 입력)</small><input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} minLength={8} maxLength={20} autoComplete="new-password" /></label>
                     <label>새 비밀번호 확인<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} minLength={8} maxLength={20} autoComplete="new-password" /></label>

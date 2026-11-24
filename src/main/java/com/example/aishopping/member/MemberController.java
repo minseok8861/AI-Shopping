@@ -23,6 +23,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import java.util.Map;
+import java.time.LocalDate;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 
 @RequiredArgsConstructor
 @RestController
@@ -31,16 +35,19 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    record MemberInfo(String name, String email) {
+    record MemberInfo(String name, String email, LocalDate birthDate, Integer heightCm, AccountType accountType) {
         static MemberInfo from(Member member) {
-            return new MemberInfo(member.getName(), member.getEmail());
+            return new MemberInfo(member.getName(), member.getEmail(), member.getBirthDate(), member.getHeightCm(),
+                    member.getAccountType() == null ? AccountType.USER : member.getAccountType());
         }
     }
 
     record UpdateMemberRequest(
             @NotBlank @Email String email,
             @NotBlank String currentPassword,
-            @Pattern(regexp = "^$|^.{8,20}$", message = "새 비밀번호는 8~20자여야 합니다.") String newPassword) {}
+            @Pattern(regexp = "^$|^.{8,20}$", message = "새 비밀번호는 8~20자여야 합니다.") String newPassword,
+            @PastOrPresent LocalDate birthDate,
+            @Min(1) @Max(300) Integer heightCm) {}
 
     record DeleteMemberRequest(@NotBlank String currentPassword) {}
 
@@ -52,7 +59,7 @@ public class MemberController {
     @PutMapping("/me")
     public MemberInfo update(@Valid @RequestBody UpdateMemberRequest request, Authentication authentication) {
         return MemberInfo.from(memberService.updateMember(authentication.getName(), request.email(),
-                request.currentPassword(), request.newPassword()));
+                request.currentPassword(), request.newPassword(), request.birthDate(), request.heightCm()));
     }
 
     @DeleteMapping("/me")
@@ -89,7 +96,8 @@ public class MemberController {
             return "비밀번호가 일치하지 않습니다.";
         }
         try{
-        memberService.createMember(memberCreateForm.getName(), memberCreateForm.getEmail(),memberCreateForm.getPassword());
+        memberService.createMember(memberCreateForm.getName(), memberCreateForm.getEmail(),memberCreateForm.getPassword(),
+                memberCreateForm.getBirthDate(), memberCreateForm.getHeightCm(), memberCreateForm.getAccountType());
 
         } catch (IllegalArgumentException e) {
             return e.getMessage();

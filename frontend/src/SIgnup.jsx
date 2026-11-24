@@ -25,7 +25,7 @@ function SignupField({ id, label, required = true, unit, ...props }) {
 export default function Signup({ accountActions }) {
     const [details, setDetails] = useState({
         name: '', email: '', password: '', password2: '',
-        fullName: '', phone: '', gender: '', birthDate: '', heightCm: '',
+        fullName: '', phone: '', gender: '', birthDate: '', heightCm: '', accountType: 'USER',
     });
     const [step, setStep] = useState(0);
     const [submitting, setSubmitting] = useState(false);
@@ -103,6 +103,13 @@ export default function Signup({ accountActions }) {
                 <h2>{headings[step]}</h2>
                 {step === 0 && (
                     <div className="signup-fields signup-account-fields">
+                        <div className="auth-field">
+                            <label htmlFor="signup-account-type">가입 유형 *</label>
+                            <select id="signup-account-type" {...field('accountType')}>
+                                <option value="USER">이용자</option>
+                                <option value="SELLER">판매자</option>
+                            </select>
+                        </div>
                         <SignupField id="signup-name" label="아이디" autoComplete="username"
                             placeholder="아이디 (4~20자)" minLength={4} maxLength={20} {...field('name')} />
                         <SignupField id="signup-email" label="이메일 주소" type="email" autoComplete="email"

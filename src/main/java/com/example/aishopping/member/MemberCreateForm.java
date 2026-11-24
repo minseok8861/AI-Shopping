@@ -3,6 +3,8 @@ package com.example.aishopping.member;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,4 +25,13 @@ public class MemberCreateForm {
     @NotEmpty(message = "이메일은 필수입니다.")
     @Email
     private String email;
+    @NotNull
+    @PastOrPresent
+    private LocalDate birthDate;
+
+    @Min(1) @Max(300)
+    private Integer heightCm;
+
+    @NotNull
+    private AccountType accountType;
 }

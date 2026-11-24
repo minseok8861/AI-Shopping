@@ -4,6 +4,7 @@ package com.example.aishopping.member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,4 +21,11 @@ public class Member {
 
     @Column(unique = true)
     private String email;
+
+    private LocalDate birthDate;
+
+    private Integer heightCm;
+
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 }
