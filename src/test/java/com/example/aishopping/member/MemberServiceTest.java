@@ -44,13 +44,12 @@ class MemberServiceTest {
     }
 
     @Test
-    void savesAndUpdatesProfileAndSellerType() {
+    void savesAndUpdatesProfile() {
         LocalDate birthDate = LocalDate.of(2000, 1, 2);
         when(repository.save(any(Member.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        Member created = service.createMember("seller", "seller@example.com", "password123", birthDate, 175, AccountType.SELLER);
+        Member created = service.createMember("newuser", "new@example.com", "password123", birthDate, 175);
         assertEquals(birthDate, created.getBirthDate());
         assertEquals(175, created.getHeightCm());
-        assertEquals(AccountType.SELLER, created.getAccountType());
         when(repository.saveAndFlush(any(Member.class))).thenAnswer(invocation -> invocation.getArgument(0));
         Member updated = service.updateMember("user", "old@example.com", "password123", "", birthDate, 180);
         assertEquals(birthDate, updated.getBirthDate());

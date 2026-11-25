@@ -5,7 +5,6 @@ import lombok.Getter;
 @Getter
 public enum MemberRole {
     MEMBER("ROLE_MEMBER"),
-    SELLER("ROLE_SELLER"),
     ADMIN("ROLE_ADMIN");
 
     MemberRole(String value) {

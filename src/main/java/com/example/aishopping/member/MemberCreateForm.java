@@ -32,6 +32,4 @@ public class MemberCreateForm {
     @Min(1) @Max(300)
     private Integer heightCm;
 
-    @NotNull
-    private AccountType accountType;
 }

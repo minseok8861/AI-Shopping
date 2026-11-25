@@ -35,10 +35,9 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    record MemberInfo(String name, String email, LocalDate birthDate, Integer heightCm, AccountType accountType) {
+    record MemberInfo(String name, String email, LocalDate birthDate, Integer heightCm) {
         static MemberInfo from(Member member) {
-            return new MemberInfo(member.getName(), member.getEmail(), member.getBirthDate(), member.getHeightCm(),
-                    member.getAccountType() == null ? AccountType.USER : member.getAccountType());
+            return new MemberInfo(member.getName(), member.getEmail(), member.getBirthDate(), member.getHeightCm());
         }
     }
 
@@ -97,7 +96,7 @@ public class MemberController {
         }
         try{
         memberService.createMember(memberCreateForm.getName(), memberCreateForm.getEmail(),memberCreateForm.getPassword(),
-                memberCreateForm.getBirthDate(), memberCreateForm.getHeightCm(), memberCreateForm.getAccountType());
+                memberCreateForm.getBirthDate(), memberCreateForm.getHeightCm());
 
         } catch (IllegalArgumentException e) {
             return e.getMessage();

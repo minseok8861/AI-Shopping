@@ -90,7 +90,6 @@ export default function Account() {
                 {member && <form onSubmit={update}>
                     <label>아이디<input value={member.name} readOnly /></label>
                     <label>이메일<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
-                    <label>가입 유형<input value={member.accountType === "SELLER" ? "판매자" : "이용자"} readOnly /></label>
                     <label>생년월일<input type="date" value={birthDate} max={new Intl.DateTimeFormat('sv-SE').format(new Date())} onChange={(e) => setBirthDate(e.target.value)} /></label>
                     <label>키 (cm)<input type="number" min="1" max="300" value={heightCm} onChange={(e) => setHeightCm(e.target.value)} /></label>
                     <label>현재 비밀번호<input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} autoComplete="current-password" required /></label>

@@ -26,6 +26,4 @@ public class Member {
 
     private Integer heightCm;
 
-    @Enumerated(EnumType.STRING)
-    private AccountType accountType;
 }

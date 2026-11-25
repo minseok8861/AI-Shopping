@@ -28,8 +28,6 @@ public class MemberSecurityService implements UserDetailsService {
     List<GrantedAuthority> authorities = new ArrayList<>();
     if ("admin".equals(membername)) {
       authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
-    } else if (member.getAccountType() == AccountType.SELLER) {
-      authorities.add(new SimpleGrantedAuthority(MemberRole.SELLER.getValue()));
     } else {
         authorities.add(new SimpleGrantedAuthority(MemberRole.MEMBER.getValue()));
     }

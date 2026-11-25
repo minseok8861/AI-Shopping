@@ -15,7 +15,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public Member createMember(String name, String email, String password, LocalDate birthDate, Integer heightCm, AccountType accountType) {
+    public Member createMember(String name, String email, String password, LocalDate birthDate, Integer heightCm) {
         if (memberRepository.existsByName(name)) {
             throw new IllegalStateException("이미 등록된 이름입니다.");
         }
@@ -27,7 +27,6 @@ public class MemberService {
         member.setEmail(email);
         member.setBirthDate(birthDate);
         member.setHeightCm(heightCm);
-        member.setAccountType(accountType);
         member.setPassword(passwordEncoder.encode(password));
         this.memberRepository.save(member);
         return member;
