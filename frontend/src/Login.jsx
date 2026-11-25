@@ -6,7 +6,7 @@ import { useCategoryPanel } from "./hooks/useCategoryPanel.js";
 import "./Login.css";
 
 const accountLinks = [
-  { to: "/login/email", label: "이메일로 로그인", variant: "login" },
+  { to: "/login/email", label: "이름으로 로그인", variant: "login" },
   { to: "/signup", label: "이메일로 회원가입", variant: "signup" },
 ];
 
@@ -129,6 +129,11 @@ function Login({ accountActions }) {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    const name = login.trim();
+    if (name.length < 2 || name.length > 20) {
+      setMessage("이름은 2자 이상 20자 이하로 입력해주세요.");
+      return;
+    }
     try {
       const response = await fetch("http://localhost:8080/login", {
         method: "POST",
@@ -137,7 +142,7 @@ function Login({ accountActions }) {
         },
         credentials: "include",
         body: new URLSearchParams({
-          username: login.trim(),
+          username: name,
           password: password,
         }),
       });
@@ -159,12 +164,13 @@ function Login({ accountActions }) {
       <form className="login-box" onSubmit={handleLogin}>
         <h1>ONDO 로그인</h1>
         <div className="auth-field">
-          <label htmlFor="login-email">이메일 주소</label>
+          <label htmlFor="login-name">이름</label>
           <input
-            id="login-email"
-            inputMode="email"
+            id="login-name"
             autoComplete="username"
-            placeholder="ondo@gmail.com"
+            placeholder="가입한 이름"
+            minLength={2}
+            maxLength={20}
             value={login}
             onChange={(e) => setLogin(e.target.value)}
             required

@@ -25,7 +25,7 @@ function SignupField({ id, label, required = true, unit, ...props }) {
 export default function Signup({ accountActions }) {
     const [details, setDetails] = useState({
         email: '', password: '', password2: '',
-        fullName: '', phone: '', gender: '', birthDate: '', heightCm: '',
+        name: '', phone: '', gender: '', birthDate: '', heightCm: '',
     });
     const [step, setStep] = useState(0);
     const [submitting, setSubmitting] = useState(false);
@@ -47,6 +47,12 @@ export default function Signup({ accountActions }) {
         if (submitting || passwordsDiffer) return;
         setError('');
 
+        const name = details.name.trim();
+        if (step >= 1 && (name.length < 2 || name.length > 20)) {
+            setError('이름은 2자 이상 20자 이하로 입력해주세요.');
+            return;
+        }
+
         if (step < 2) {
             setStep(step + 1);
             return;
@@ -59,7 +65,7 @@ export default function Signup({ accountActions }) {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams({
                     ...details,
-                    fullName: details.fullName.trim(),
+                    name,
                     phone: details.phone.replaceAll('-', ''),
                 }),
             });
@@ -115,8 +121,8 @@ export default function Signup({ accountActions }) {
                 )}
                 {step === 1 && (
                     <div className="signup-fields">
-                        <SignupField id="signup-full-name" label="이름" autoComplete="name"
-                            placeholder="김온도" maxLength={100} pattern=".*[^ ].*" {...field('fullName')} />
+                        <SignupField id="signup-name" label="이름" autoComplete="name"
+                            placeholder="김온도" minLength={2} maxLength={20} {...field('name')} />
                         <SignupField id="signup-phone" label="휴대전화" type="tel" autoComplete="tel-national"
                             placeholder="010-1234-5678" pattern="01[0-9]-?[0-9]{3,4}-?[0-9]{4}"
                             title="010-1234-5678 형식으로 입력해주세요." {...field('phone')} />
